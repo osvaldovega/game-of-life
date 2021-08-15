@@ -1,0 +1,14 @@
+.cell {
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.cellLive {
+  background-color: black;
+}
+
+.cellDead {
+  background-color: white;
+}
