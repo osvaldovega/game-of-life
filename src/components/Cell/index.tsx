@@ -1,4 +1,4 @@
-import styles from './styles.module.scss';
+import * as S from './styles';
 
 interface IProps {
   id: string;
@@ -7,11 +7,5 @@ interface IProps {
 }
 
 export const Cell: React.FC<IProps> = ({ id, status, onGridCellClick }): JSX.Element => {
-  return (
-    <div
-      id={id}
-      className={`${styles.cell} ${status ? styles.cellLive : styles.cellDead}`}
-      onClick={onGridCellClick}
-    ></div>
-  );
+  return <S.Cell id={id} onClick={onGridCellClick} status={status}></S.Cell>;
 };

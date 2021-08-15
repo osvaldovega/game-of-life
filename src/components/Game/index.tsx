@@ -1,8 +1,9 @@
 import { useState, useCallback, useRef } from 'react';
+import { Container, Grid, Typography, Button } from '@material-ui/core';
 import { initial2DGrid, update2DGrid, update2DGridOnRunning } from 'utils/game';
 import { NUMBER_OF_COLS, NUMBER_OF_ROWS, ALIVE, DEAD } from 'utils/constants';
-import { Grid } from 'components/Grid';
-import styles from './styles.module.scss';
+import { Board } from '../Board';
+import * as S from './styles';
 
 export const Game: React.FC = (): JSX.Element => {
   const [grid, setGrid] = useState(initial2DGrid(NUMBER_OF_COLS, NUMBER_OF_ROWS));
@@ -36,20 +37,28 @@ export const Game: React.FC = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <h3>Game of Life of John Conway's</h3>
+    <S.Box>
+      <Container maxWidth="lg">
+        <Grid container direction="column" justifyContent="center" alignItems="center">
+          <Grid item>
+            <Typography variant="h2">Game of Life of John Conway&apos;s</Typography>
+          </Grid>
 
-      <button type="button" onClick={handleStartStopGame}>
-        {isGameRunning ? 'Stop' : 'Start'}
-      </button>
+          <S.GridButtons container item justifyContent="space-evenly" alignItems="center">
+            <Button variant="outlined" color="secondary" onClick={handleStartStopGame}>
+              <Typography>{isGameRunning ? 'Stop' : 'Start'}</Typography>
+            </Button>
 
-      <button type="button" onClick={handleResetGrid}>
-        Reset
-      </button>
+            <Button variant="outlined" color="secondary" onClick={handleResetGrid}>
+              <Typography>Reset</Typography>
+            </Button>
+          </S.GridButtons>
 
-      <div className={styles.grid}>
-        <Grid grid={grid} onGridCellClick={handleCellClick} />
-      </div>
-    </div>
+          <Grid item>
+            <Board grid={grid} onGridCellClick={handleCellClick} />
+          </Grid>
+        </Grid>
+      </Container>
+    </S.Box>
   );
 };
